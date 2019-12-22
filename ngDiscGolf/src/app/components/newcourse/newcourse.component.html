@@ -1,0 +1,19 @@
+<form *ngIf="!selected">
+    New Course: <br>
+    <div class = 'row'>
+      <div class = 'col-6'>
+          Name: <input type="text" name="name" [(ngModel)]="newCourse.name" /> <br>
+          Length: <input type="number" name="length" [(ngModel)]="newCourse.length" /> <br>
+          Description:<br> <textarea name="description" rows="10" cols="30" [(ngModel)]="newCourse.description" ></textarea> <br>
+      </div>
+      <div class = 'col-6'>
+          Street address: <input type = 'text' name="street" [(ngModel)]="newAddress.street"><br>
+          City: <input type='text' name='city' [(ngModel)]="newAddress.city"><br>
+          State: <input type='text' name = 'state' [(ngModel)]="newAddress.state"><br>
+          Zip Code: <input type = 'text' name = 'zip' [(ngModel)]="newAddress.zip"><br>
+      </div>
+    </div>
+    <div class = 'row'>
+        <input type="submit" name="submit" (click)="addNewAddress()" />
+    </div>
+  </form>

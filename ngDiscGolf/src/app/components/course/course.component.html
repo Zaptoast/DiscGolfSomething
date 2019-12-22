@@ -1,0 +1,41 @@
+
+<div *ngIf="editCourse">
+  <form>
+    Name:<input type="text" value="selected.name" name="task" [(ngModel)]="editCourse.name"/><br />
+
+    Length:<input type="number" value="selected.Length" name="task" [(ngModel)]="editCourse.length"/><br />
+
+    Description:<br><textarea name="description" rows="10" cols="30"  [(ngModel)]="editCourse.description">{{selected.description}}</textarea><br />
+    <button class="btn" (click)="selected = editCourse; updateCourse(selected); editCourse = null"> submit</button>
+    <button class="btn" (click)="editCourse = null">Cancel</button>
+  </form>
+</div>
+<div *ngIf="!editCourse">
+  <div *ngIf="selected">
+    <h2>{{selected.name}}</h2>
+    <h2> Rating: {{ averageRating(selected) | number: '1.1-1' }}</h2>
+    <h4>{{selected.address.street}}</h4>
+    <h4>{{selected.address.city}}</h4>
+    <h5>{{selected.description}}</h5>
+    <ngb-rating [(rate)]="ratingValue"></ngb-rating><button (click)='rateCourse()'>Rate</button><br>
+    <button class="btn" (click)="setEditCourse(); reload()">Edit</button>
+    <button class="btn" (click)="selected = null; reload()">Back</button>
+  </div>
+</div>
+<table *ngIf="!selected">
+  <tr>
+    <td>Course</td>
+    <td>Length</td>
+    <td>Address</td>
+    <td>Zip Code</td>
+  </tr>
+  <tr *ngFor="let course of courses">
+    <td (click)="selected = course">{{ course.name }}</td>
+    <td>{{ course.length }}</td>
+    <td *ngIf='course.address != null'>{{ course.address.city }}</td>
+    <td *ngIf='course.address != null'>{{ course.address.zip }}</td>
+    <td><button (click)='delete(course)'>X</button></td>
+  </tr>
+</table>
+
+<br />
